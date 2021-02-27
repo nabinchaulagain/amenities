@@ -4,12 +4,23 @@ const APIError = require('../utils/APIError');
 const validateBody = require('../utils/validateBody');
 
 const userSchema = joi.object({
-  email: joi.string().email().required(),
   username: joi.string().min(3).max(25).required(),
   password: joi.string().required()
 });
 
 const validateSignupData = async (req, res, next) => {
+  try {
+    await validateBody(
+      userSchema.keys({ email: joi.string().email().required() }),
+      req.body
+    );
+    next();
+  } catch (err) {
+    next(err);
+  }
+};
+
+const validateLoginData = async (req, res, next) => {
   try {
     await validateBody(userSchema, req.body);
     next();
@@ -40,4 +51,8 @@ const validateDuplicateData = async (req, res, next) => {
   }
 };
 
-module.exports = { validateSignupData, validateDuplicateData };
+module.exports = {
+  validateLoginData,
+  validateSignupData,
+  validateDuplicateData
+};
