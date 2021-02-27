@@ -29,6 +29,5 @@ module.exports = {
   client: process.env.DB_CLIENT,
   migrations: {
     directory: path.join(__dirname, 'migrations')
-  },
-  process
+  }
 };
