@@ -11,7 +11,7 @@ const authController = {
   signup: async (req, res, next) => {
     try {
       const user = await createUser(req.body);
-      sendResponse(res, { msg: 'Success', user });
+      sendResponse(res, { message: 'Successfully created account', user });
     } catch (err) {
       next(err);
     }
@@ -22,16 +22,22 @@ const authController = {
       const { username, password } = req.body;
       const user = await getUser(username, 'username');
       if (!user) {
-        throw new APIError({
-          error: 'Username error',
-          detail: { username: 'Username not found' }
-        });
+        throw new APIError(
+          {
+            error: 'Username error',
+            detail: { username: 'Username not found' }
+          },
+          404
+        );
       }
       if (!(await doesPasswordMatch(password, user.password))) {
-        throw new APIError({
-          error: "Password didn't match",
-          detail: { password: 'Password was incorrect' }
-        });
+        throw new APIError(
+          {
+            error: "Password didn't match",
+            detail: { password: 'Password was incorrect' }
+          },
+          401
+        );
       }
       const token = encodeJWT({
         id: user.id,
@@ -39,7 +45,7 @@ const authController = {
         email: user.email,
         createdAt: user.created_at
       });
-      sendResponse(res, { msg: 'Successfully logged in', token });
+      sendResponse(res, { message: 'Successfully logged in', token });
     } catch (err) {
       next(err);
     }

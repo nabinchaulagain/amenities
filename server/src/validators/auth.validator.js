@@ -28,7 +28,6 @@ const validateLoginData = async (req, res, next) => {
     next(err);
   }
 };
-
 const validateDuplicateData = async (req, res, next) => {
   try {
     const errors = {};

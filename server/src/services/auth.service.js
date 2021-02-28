@@ -2,20 +2,23 @@ const db = require('../db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const userTable = db('users');
-
 const createUser = async (data) => {
   const salt = await bcrypt.genSalt(12);
   const hashedPassword = await bcrypt.hash(data.password, salt);
-  const newUsers = await userTable.insert({
-    ...data,
-    password: hashedPassword
-  });
+  const newUsers = await db('users').insert(
+    {
+      ...data,
+      password: hashedPassword
+    },
+    ['id', 'username', 'email', 'created_at']
+  );
   return newUsers[0];
 };
 
 const getUser = async (val, col = 'id') => {
-  const users = await userTable.select().where({ [col]: val });
+  const users = await db('users')
+    .select()
+    .where({ [col]: val });
   return users[0];
 };
 
