@@ -30,9 +30,14 @@ const AuthForm = (props) => {
             initialValues={props.initialValues}
             validationSchema={props.validationSchema}
             validate={props.validate}
-            onSubmit={(values, { setSubmitting, setErrors }) => {
-              props.onSubmit(values);
-              setSubmitting(false);
+            onSubmit={async (values, { setErrors }) => {
+              try {
+                await props.onSubmit(values);
+              } catch ({ response }) {
+                if (response.data.detail) {
+                  setErrors(response.data.detail);
+                }
+              }
             }}
           >
             {({ isSubmitting, errors, touched }) => {
@@ -62,6 +67,7 @@ const AuthForm = (props) => {
                         variant="outlined"
                         margin="dense"
                         fullWidth={true}
+                        autoComplete="off"
                       />
                     ))}
                   <Button

@@ -2,6 +2,9 @@ import React from 'react';
 import * as Yup from 'yup';
 import AuthForm from './AuthForm';
 import Link from '../common/Link';
+import { login, updateAuthStatus } from '../../actions/auth.actions';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const loginSchem = Yup.object().shape({
   username: Yup.string().min(3).max(25).required(),
@@ -14,8 +17,12 @@ const initialValues = {
 };
 
 const Login = () => {
-  const handleSubmit = (values) => {
-    console.log(values);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const handleSubmit = async (values) => {
+    await dispatch(login(values));
+    await dispatch(updateAuthStatus());
+    history.push('/');
   };
   return (
     <AuthForm
