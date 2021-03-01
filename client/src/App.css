@@ -7,3 +7,23 @@
 body {
   background: #e8dcda;
 }
+
+.auth-form {
+  text-align: center;
+}
+
+.auth-form button {
+  margin-top: 16px;
+}
+
+.auth-form-wrapper {
+  padding: 24px 32px;
+}
+
+.auth-grid {
+  min-height: 60vh;
+}
+
+.auth-form .auth-form-link-wrapper {
+  margin-top: 16px;
+}
