@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './home/Home';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
+import Navbar from './Navbar';
 import { useDispatch } from 'react-redux';
 import { updateAuthStatus } from '../actions/auth.actions';
 
@@ -14,6 +15,7 @@ const App = () => {
   }, [dispatch]);
   return (
     <BrowserRouter>
+      <Navbar></Navbar>
       <Switch>
         <Route path="/" exact>
           <Home />
