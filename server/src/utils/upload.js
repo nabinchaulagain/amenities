@@ -10,6 +10,9 @@ const storage = multerS3({
   bucket: process.env.S3_BUCKET_NAME,
   acl: 'public-read',
   contentDisposition: 'inline',
+  contentType: (req, file, cb) => {
+    cb(null, file.mimetype);
+  },
   key: (req, file, cb) => {
     cb(
       null,
