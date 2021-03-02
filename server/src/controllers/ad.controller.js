@@ -31,7 +31,8 @@ const adController = {
   getAd: async (req, res, next) => {
     try {
       const ad = await getAd(+req.params.id);
-      if (!ad) {
+      // if showing only user field i.e: row not found
+      if (Object.values(ad).length === 1) {
         throw new APIError({ message: 'Not found' }, 404);
       }
       sendResponse(res, ad);
