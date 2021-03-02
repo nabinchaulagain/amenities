@@ -5,6 +5,7 @@ const {
   deleteAd,
   getAds
 } = require('../services/ad.service');
+const APIError = require('../utils/APIError');
 const sendResponse = require('../utils/sendResponse');
 const { deleteFromStorage } = require('../utils/uploadStorage');
 
@@ -30,6 +31,9 @@ const adController = {
   getAd: async (req, res, next) => {
     try {
       const ad = await getAd(+req.params.id);
+      if (!ad) {
+        throw new APIError({ message: 'Not found' }, 404);
+      }
       sendResponse(res, ad);
     } catch (err) {
       next(err);
@@ -50,8 +54,7 @@ const adController = {
       const ad = await getAd(+req.params.id);
       const adData = {
         ...req.body,
-        image: req.file.location,
-        ['user_id']: req.user.id
+        image: req.file.location
       };
       const updatedAd = await updateAd(+req.params.id, adData);
       sendResponse(res, {
