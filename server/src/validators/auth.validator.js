@@ -20,14 +20,15 @@ const validateSignupData = async (req, res, next) => {
   }
 };
 
-const validateLoginData = async (req, res, next) => {
+const validateLoginData = (req, res, next) => {
   try {
-    await validateBody(userSchema, req.body);
+    validateBody(userSchema, req.body);
     next();
   } catch (err) {
     next(err);
   }
 };
+
 const validateDuplicateData = async (req, res, next) => {
   try {
     const errors = {};

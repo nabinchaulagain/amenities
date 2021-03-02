@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const authRoutes = require('./routes/auth.route');
+const adRoutes = require('./routes/ad.route');
 const handleError = require('./middlewares/handleError');
 const parseUser = require('./middlewares/parseUser');
 
@@ -13,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(parseUser);
 
 app.use('/api/auth', authRoutes);
+app.use('/api/ads', adRoutes);
 
 app.use(handleError);
 
