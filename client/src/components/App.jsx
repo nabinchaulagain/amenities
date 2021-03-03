@@ -9,6 +9,8 @@ import Navbar from './Navbar';
 import { useDispatch } from 'react-redux';
 import { updateAuthStatus } from '../actions/auth.actions';
 import EditAd from './ads/editAd/EditAd';
+import DeleteAd from './ads/deleteAd/DeleteAd';
+import Ad from './ads/ad/Ad';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -28,11 +30,17 @@ const App = () => {
         <Route path="/signup" exact>
           <Signup />
         </Route>
-        <Route path="/ads/create">
+        <Route path="/ads/create" exact>
           <CreateAd />
         </Route>
-        <Route path="/ads/:id/edit">
+        <Route path="/ads/:id(\d+)" exact>
+          <Ad />
+        </Route>
+        <Route path="/ads/:id(\d+)/edit" exact>
           <EditAd />
+        </Route>
+        <Route path="/ads/:id(\d+)/delete" exact>
+          <DeleteAd />
         </Route>
       </Switch>
     </BrowserRouter>

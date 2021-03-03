@@ -28,15 +28,12 @@ const EditAd = () => {
   });
 
   React.useEffect(() => {
-    if (!Number.isInteger(adId)) {
-      history.push('/'); //redirect to home if ad is not an integer
-    }
     dispatch(getAd(adId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [history, adId]);
+  }, [adId]);
 
   if (!ad) {
-    return 'loading...';
+    return null;
   }
 
   return (
