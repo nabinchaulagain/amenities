@@ -1,9 +1,10 @@
 import '../App.css';
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Home from './home/Home';
+import Home from './ads/home/Home';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
+import CreateAd from './ads/createAd/CreateAd';
 import Navbar from './Navbar';
 import { useDispatch } from 'react-redux';
 import { updateAuthStatus } from '../actions/auth.actions';
@@ -25,6 +26,9 @@ const App = () => {
         </Route>
         <Route path="/signup" exact>
           <Signup />
+        </Route>
+        <Route path="/ads/create">
+          <CreateAd />
         </Route>
       </Switch>
     </BrowserRouter>
