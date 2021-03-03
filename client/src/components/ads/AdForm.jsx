@@ -14,15 +14,24 @@ const AdForm = (props) => {
             {props.formHeader}
           </Typography>
           <Formik
-            initialValues={{
-              title: '',
-              description: '',
-              price: '',
-              location: '',
-              image: ''
-            }}
+            initialValues={props.initialValues}
             validationSchema={props.validationSchema}
-            onSubmit={async (values) => {}}
+            onSubmit={async (values, { setErrors }) => {
+              const formData = new FormData();
+              for (const key in values) {
+                if (key === 'image' && typeof values[key] === 'string') {
+                  continue;
+                }
+                formData.append(key, values[key]);
+              }
+              try {
+                await props.onSubmit(formData);
+              } catch ({ response }) {
+                if (response && response.data && response.data.detail) {
+                  setErrors(response.data.detail);
+                }
+              }
+            }}
             validateOnBlur={false}
             validateOnChange={false}
           >
@@ -43,12 +52,12 @@ const AdForm = (props) => {
                   <AdTextFeild
                     name="price"
                     label="Price"
-                    helperText={errors.price}
+                    error={errors.price}
                   />
                   <AdTextFeild
                     name="location"
                     label="Location"
-                    helperText={errors.location}
+                    error={errors.location}
                   />
                   <ImageInputWithPreview
                     image={values.image ? values.image : previewImage}
@@ -102,7 +111,7 @@ const AdForm = (props) => {
 const AdTextFeild = ({ label, name, error, ...props }) => {
   return (
     <Field
-      autocomplete="off"
+      autoComplete="off"
       variant="outlined"
       name={name}
       margin="dense"
@@ -120,7 +129,9 @@ AdForm.propTypes = {
   formHeader: propTypes.string.isRequired,
   validationSchema: propTypes.object.isRequired,
   submitBtnColor: propTypes.string,
-  submitBtnText: propTypes.string.isRequired
+  submitBtnText: propTypes.string.isRequired,
+  onSubmit: propTypes.func.isRequired,
+  initialValues: propTypes.object.isRequired
 };
 
 AdForm.defaultProps = {

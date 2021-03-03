@@ -27,7 +27,7 @@ export const editAd = (id, data) => {
       type: EDIT_AD,
       payload: {
         id,
-        ad: res.ad
+        ad: res.data.ad
       }
     });
   };
