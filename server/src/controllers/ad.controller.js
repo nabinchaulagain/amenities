@@ -54,15 +54,19 @@ const adController = {
     try {
       const ad = await getAd(+req.params.id);
       const adData = {
-        ...req.body,
-        image: req.file.location
+        ...req.body
       };
+      if (req.file) {
+        adData.image = req.file.location;
+      }
       const updatedAd = await updateAd(+req.params.id, adData);
       sendResponse(res, {
         message: 'Updated advertisement',
         ad: { ...req.body, ...updatedAd }
       });
-      deleteFromStorage(ad.image); // delete previous file
+      if (req.file) {
+        deleteFromStorage(ad.image); // delete previous file
+      }
     } catch (err) {
       next(err);
       deleteFromStorage(req.file.key);
