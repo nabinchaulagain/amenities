@@ -16,7 +16,7 @@ const Ad = () => {
   const userId = useSelector((state) => state.auth.user && state.auth.user.id);
 
   React.useEffect(() => {
-    dispatch(getAd(adId));
+    dispatch(getAd(adId, true));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [adId]);
 
@@ -42,7 +42,7 @@ const Ad = () => {
           <Typography variant="h5" component="h3" align="center">
             Property description
           </Typography>
-          <Box mt={2} mb={2} component="div">
+          <Box mt={2} mb={2} component="pre" style={{ fontFamily: 'Roboto' }}>
             {ad.description}
           </Box>
         </Container>
