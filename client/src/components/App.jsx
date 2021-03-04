@@ -1,7 +1,7 @@
 import '../App.css';
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Home from './ads/home/Home';
+import Home from './ads/showAds/Home';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
 import CreateAd from './ads/createAd/CreateAd';
@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { updateAuthStatus } from '../actions/auth.actions';
 import EditAd from './ads/editAd/EditAd';
 import DeleteAd from './ads/deleteAd/DeleteAd';
-import Ad from './ads/ad/Ad';
+import Ad from './ads/showAd/Ad';
 import PrivateRoute from './common/PrivateRoute';
 
 const App = () => {

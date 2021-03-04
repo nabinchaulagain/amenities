@@ -1,9 +1,9 @@
-import { Container, Grid, Typography, Button } from '@material-ui/core';
+import { Container, Typography, Button } from '@material-ui/core';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAds } from '../../../actions/ad.action';
-import AdCard from './AdCard';
 import Link from '../../common/Link';
+import AdList from './AdList';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -23,17 +23,9 @@ const Home = () => {
         </Link>
       </Container>
       <Typography variant="h4" component="h2" className="heading">
-        Recent ads
+        Advertisements
       </Typography>
-      <Grid container>
-        {ads.map((ad) => {
-          return (
-            <div key={ad.id} className="ad-card-wrapper">
-              <AdCard {...ad} />
-            </div>
-          );
-        })}
-      </Grid>
+      <AdList ads={ads} />
     </Container>
   );
 };

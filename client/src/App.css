@@ -50,7 +50,8 @@ body {
 }
 
 .ad-card-wrapper {
-  margin: auto;
+  margin-right: 16px;
+  margin-bottom: 16px;
 }
 
 .heading {
@@ -67,13 +68,4 @@ body {
 
 .ad-info-list li {
   font-size: 18px;
-}
-
-.modal {
-  top: 25%;
-  left: 50%;
-  position: fixed;
-  width: 500px;
-  height: 500px;
-  background: white;
 }
