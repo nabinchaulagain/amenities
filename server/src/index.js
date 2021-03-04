@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const authRoutes = require('./routes/auth.route');
 const adRoutes = require('./routes/ad.route');
+const commentRoutes = require('./routes/comment.route');
 const handleError = require('./middlewares/handleError');
 const parseUser = require('./middlewares/parseUser');
 
@@ -15,6 +16,7 @@ app.use(parseUser);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/ads', adRoutes);
+app.use('/api', commentRoutes);
 
 app.use(handleError);
 
