@@ -1,17 +1,24 @@
-import { Container, Typography, Button } from '@material-ui/core';
+import { Container, Button } from '@material-ui/core';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAds } from '../../../actions/ad.action';
 import Link from '../../common/Link';
 import AdList from './AdList';
+import AdSearch from './AdSearch';
 
 const Home = () => {
+  const [searchQuery, setSearchQuery] = React.useState('');
+
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(getAds());
   }, [dispatch]);
 
-  const ads = useSelector((state) => state.ad.list);
+  const ads = useSelector((state) => {
+    return state.ad.list.filter((ad) =>
+      ad.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  });
 
   return (
     <Container maxWidth="lg" align="center">
@@ -22,10 +29,13 @@ const Home = () => {
           </Button>
         </Link>
       </Container>
-      <Typography variant="h4" component="h2" className="heading">
-        Advertisements
-      </Typography>
-      <AdList ads={ads} />
+      <AdSearch
+        onChange={(ev) => {
+          setSearchQuery(ev.target.value);
+        }}
+      />
+      {ads.length !== 0 && <AdList ads={ads} />}
+      {ads.length === 0 && <>No results found</>}
     </Container>
   );
 };
