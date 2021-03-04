@@ -13,7 +13,7 @@ const Ad = () => {
   const dispatch = useEnhancedDispatch();
 
   const ad = useSelector((state) => state.ad.list.find((ad) => ad.id === adId));
-  const userId = useSelector((state) => state.auth.user.id);
+  const userId = useSelector((state) => state.auth.user && state.auth.user.id);
 
   React.useEffect(() => {
     dispatch(getAd(adId));
@@ -23,6 +23,7 @@ const Ad = () => {
   if (!ad || !ad.user) {
     return null;
   }
+
   return (
     <Container maxWidth="lg" style={{ marginTop: 16 }}>
       <Grid container>
@@ -37,16 +38,16 @@ const Ad = () => {
           </Typography>
           <AdInfo {...ad} />
         </Grid>
-        <Typography variant="h5" component="h3">
-          Property description
-        </Typography>
         <Container>
+          <Typography variant="h5" component="h3" align="center">
+            Property description
+          </Typography>
           <Box mt={2} mb={2} component="div">
             {ad.description}
           </Box>
         </Container>
       </Grid>
-      {ad.user.id === userId && <AdControls id={ad.id} />}
+      {ad.user.userId === userId && <AdControls id={ad.id} />}
     </Container>
   );
 };

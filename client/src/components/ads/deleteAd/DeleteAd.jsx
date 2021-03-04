@@ -1,26 +1,23 @@
-import { Paper, Typography, ButtonGroup, Button, Box } from '@material-ui/core';
+import { Paper, Typography, Button, Box } from '@material-ui/core';
 import React from 'react';
 import useEnhancedDispatch from '../../../utils/useEnhancedDispatch';
 import { getAd, removeAd } from '../../../actions/ad.action';
 import { useHistory, useRouteMatch } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import Link from '../../common/Link';
+import withAdProtected from '../../../hoc/withAdProtected';
 
-const DeleteAd = () => {
+const DeleteAd = ({ ad }) => {
   const match = useRouteMatch();
   const history = useHistory();
-  const adId = +match.params.id;
   const dispatch = useEnhancedDispatch();
-  const ad = useSelector((state) => state.ad.list.find((ad) => ad.id === adId));
+
+  const adId = +match.params.id;
 
   React.useEffect(() => {
     dispatch(getAd(adId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [adId]);
 
-  if (!ad) {
-    return null;
-  }
   return (
     <Box m={'auto'} mt={2} maxWidth={1000}>
       <Paper style={{ padding: 16 }} align="center">
@@ -51,4 +48,4 @@ const DeleteAd = () => {
   );
 };
 
-export default DeleteAd;
+export default withAdProtected(DeleteAd);

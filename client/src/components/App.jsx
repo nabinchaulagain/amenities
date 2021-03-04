@@ -11,6 +11,7 @@ import { updateAuthStatus } from '../actions/auth.actions';
 import EditAd from './ads/editAd/EditAd';
 import DeleteAd from './ads/deleteAd/DeleteAd';
 import Ad from './ads/ad/Ad';
+import PrivateRoute from './common/PrivateRoute';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -30,18 +31,18 @@ const App = () => {
         <Route path="/signup" exact>
           <Signup />
         </Route>
-        <Route path="/ads/create" exact>
+        <PrivateRoute path="/ads/create" exact>
           <CreateAd />
-        </Route>
+        </PrivateRoute>
         <Route path="/ads/:id(\d+)" exact>
           <Ad />
         </Route>
-        <Route path="/ads/:id(\d+)/edit" exact>
+        <PrivateRoute path="/ads/:id(\d+)/edit" exact>
           <EditAd />
-        </Route>
-        <Route path="/ads/:id(\d+)/delete" exact>
+        </PrivateRoute>
+        <PrivateRoute path="/ads/:id(\d+)/delete" exact>
           <DeleteAd />
-        </Route>
+        </PrivateRoute>
       </Switch>
     </BrowserRouter>
   );
