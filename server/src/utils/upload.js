@@ -23,7 +23,7 @@ const storage = multerS3({
   }
 });
 
-const allowedMimeTypes = ['image/png', 'image/jpg'];
+const allowedMimeTypes = ['image/png', 'image/jpg', 'image/jpeg'];
 const fileFilter = (req, file, cb) => {
   if (!allowedMimeTypes.includes(file.mimetype)) {
     req.uploadError = 'file should be a image(jpg or png)';

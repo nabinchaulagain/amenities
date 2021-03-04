@@ -1,12 +1,17 @@
 import '../App.css';
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Home from './home/Home';
+import Home from './ads/home/Home';
 import Login from './auth/Login';
 import Signup from './auth/Signup';
+import CreateAd from './ads/createAd/CreateAd';
 import Navbar from './Navbar';
 import { useDispatch } from 'react-redux';
 import { updateAuthStatus } from '../actions/auth.actions';
+import EditAd from './ads/editAd/EditAd';
+import DeleteAd from './ads/deleteAd/DeleteAd';
+import Ad from './ads/ad/Ad';
+import PrivateRoute from './common/PrivateRoute';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -26,6 +31,18 @@ const App = () => {
         <Route path="/signup" exact>
           <Signup />
         </Route>
+        <PrivateRoute path="/ads/create" exact>
+          <CreateAd />
+        </PrivateRoute>
+        <Route path="/ads/:id(\d+)" exact>
+          <Ad />
+        </Route>
+        <PrivateRoute path="/ads/:id(\d+)/edit" exact>
+          <EditAd />
+        </PrivateRoute>
+        <PrivateRoute path="/ads/:id(\d+)/delete" exact>
+          <DeleteAd />
+        </PrivateRoute>
       </Switch>
     </BrowserRouter>
   );

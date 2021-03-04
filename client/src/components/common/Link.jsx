@@ -5,7 +5,7 @@ import propTypes from 'prop-types';
 
 const LinkEl = ({ to, children, underline, color }) => {
   return (
-    <MuiLink underline={underline} component={Link} to={to}>
+    <MuiLink underline={underline} component={Link} to={to} color={color}>
       {children}
     </MuiLink>
   );
@@ -16,7 +16,8 @@ LinkEl.propTypes = {
 };
 
 LinkEl.defaultProps = {
-  underline: 'hover'
+  underline: 'hover',
+  color: 'primary'
 };
 
 export default LinkEl;

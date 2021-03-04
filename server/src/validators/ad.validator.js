@@ -6,13 +6,17 @@ const adSchema = joi.object({
   title: joi.string().min(3).max(30).required(),
   description: joi.string().min(6).max(300).required(),
   price: joi.number().min(1).required(),
-  location: joi.string().min(5).max(100).required(),
-  image: joi.required()
+  location: joi.string().min(5).max(100).required()
 });
 
 const validateAd = (req, res, next) => {
   try {
-    validateBody(adSchema, { image: req.file, ...req.body });
+    if (req.method === 'POST') {
+      const validationSchema = adSchema.keys({ image: joi.required() });
+      validateBody(validationSchema, { image: req.file, ...req.body });
+    } else {
+      validateBody(adSchema, req.body);
+    }
     next();
   } catch (err) {
     if (req.uploadError) {
