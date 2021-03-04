@@ -1,6 +1,6 @@
 const db = require('../db');
 
-const selectedColumns = ['id', 'title', 'price', 'image'];
+const selectedColumns = ['id', 'title', 'price', 'image', 'views'];
 
 const createAd = async (data) => {
   const adsCreated = await db('ads').insert(data, selectedColumns);
@@ -29,6 +29,7 @@ const getAd = async (id) => {
       'price',
       'location',
       'image',
+      'views',
       'ads.created_at',
       'users.email',
       'users.username',
@@ -40,7 +41,10 @@ const getAd = async (id) => {
 };
 
 const getAds = () => {
-  return db('ads').select(...selectedColumns);
+  return db('ads')
+    .select(...selectedColumns)
+    .orderBy('views', 'desc')
+    .orderBy('created_at', 'desc');
 };
 
 const updateAd = async (id, data) => {
@@ -54,4 +58,17 @@ const deleteAd = (id) => {
   return db('ads').delete().where({ id });
 };
 
-module.exports = { createAd, getAd, getAds, updateAd, deleteAd };
+const incrementAdViews = (id, views) => {
+  return db('ads')
+    .update({ views: views + 1 })
+    .where({ id });
+};
+
+module.exports = {
+  createAd,
+  getAd,
+  getAds,
+  updateAd,
+  deleteAd,
+  incrementAdViews
+};

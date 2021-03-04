@@ -7,6 +7,7 @@ exports.up = function (knex) {
     table.string('location', 128).notNullable();
     table.string('image', 128).notNullable();
     table.timestamp('created_at').defaultTo(knex.fn.now());
+    table.integer('views').defaultTo(0);
     table.integer('user_id').notNullable();
     table.foreign('user_id').references('users.id');
   });

@@ -3,7 +3,8 @@ const {
   getAd,
   updateAd,
   deleteAd,
-  getAds
+  getAds,
+  incrementAdViews
 } = require('../services/ad.service');
 const APIError = require('../utils/APIError');
 const sendResponse = require('../utils/sendResponse');
@@ -36,6 +37,9 @@ const adController = {
         throw new APIError({ message: 'Not found' }, 404);
       }
       sendResponse(res, ad);
+      if (req.query.shouldUpdateViews === 'true') {
+        await incrementAdViews(+req.params.id, ad.views);
+      }
     } catch (err) {
       next(err);
     }

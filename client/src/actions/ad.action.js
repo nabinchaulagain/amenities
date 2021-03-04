@@ -33,9 +33,11 @@ export const editAd = (id, data) => {
   };
 };
 
-export const getAd = (id) => {
+export const getAd = (id, shouldUpdateViews = false) => {
   return async (dispatch) => {
-    const res = await api.get(`/api/ads/${id}`);
+    const res = await api.get(
+      `/api/ads/${id}${shouldUpdateViews ? '?shouldUpdateViews=true' : ''}`
+    );
     dispatch({ type: GET_AD, payload: res.data });
   };
 };
