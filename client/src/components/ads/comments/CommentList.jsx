@@ -2,25 +2,27 @@ import React from 'react';
 import Comment from './Comment';
 import { Card, Typography } from '@material-ui/core';
 import CommentForm from './CommentForm';
+import { useSelector } from 'react-redux';
+import { askQuestion } from '../../../actions/comment.action';
+import useEnhancedDispatch from '../../../utils/useEnhancedDispatch';
 
-const comments = [
-  { id: 1, question: 'questtionaarie', answer: 'asdasd', username: 'yes' },
-  {
-    id: 2,
-    question: 'is this real?',
-    answer: 'yes, real as it gets.',
-    username: 'big'
-  },
-  { id: 3, question: 'sadasd', username: 'nothing' }
-];
-
-const CommentList = ({ isAdOwner }) => {
+const CommentList = ({ adId, isAdOwner }) => {
+  const comments = useSelector((state) => state.comments.list);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useEnhancedDispatch();
   return (
     <Card color="inherit" className="comment-list-container">
       <Typography variant="h5" component="h3">
         Queries
       </Typography>
-      <CommentForm placeholder="Ask a question" />
+      {isLoggedIn && (
+        <CommentForm
+          placeholder="Ask a question"
+          onSubmit={(value) => {
+            dispatch(askQuestion(adId, value));
+          }}
+        />
+      )}
       {comments.map((comment) => {
         return (
           <Comment

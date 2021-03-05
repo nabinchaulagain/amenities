@@ -17,7 +17,7 @@ const commentController = {
       );
       sendResponse(res, {
         message: 'added successfully',
-        question: newQuestion
+        question: { ...newQuestion, username: req.user.username }
       });
     } catch (err) {
       next(err);

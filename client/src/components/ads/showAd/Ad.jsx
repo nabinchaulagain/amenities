@@ -7,6 +7,7 @@ import useEnhancedDispatch from '../../../utils/useEnhancedDispatch';
 import AdControls from './AdControls';
 import AdInfo from './AdInfo';
 import CommentList from '../comments/CommentList';
+import { getComments } from '../../../actions/comment.action';
 
 const Ad = () => {
   const match = useRouteMatch();
@@ -18,6 +19,7 @@ const Ad = () => {
 
   React.useEffect(() => {
     dispatch(getAd(adId, true));
+    dispatch(getComments(adId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [adId]);
 
@@ -49,7 +51,10 @@ const Ad = () => {
         </Container>
       </Grid>
       {ad.user.userId === userId && <AdControls id={ad.id} />}
-      <CommentList isAdOwner={ad.user.userId === userId}></CommentList>
+      <CommentList
+        isAdOwner={ad.user.userId === userId}
+        adId={adId}
+      ></CommentList>
     </Container>
   );
 };

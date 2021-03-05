@@ -2,8 +2,11 @@ import React from 'react';
 import { Box, Grid } from '@material-ui/core';
 import { LiveHelp, QuestionAnswer } from '@material-ui/icons';
 import CommentForm from './CommentForm';
+import useEnhancedDispatch from '../../../utils/useEnhancedDispatch';
+import { answerQuestion } from '../../../actions/comment.action';
 
-const Comment = ({ question, answer, username, isAdOwner }) => {
+const Comment = ({ id, question, answer, username, isAdOwner }) => {
+  const dispatch = useEnhancedDispatch();
   return (
     <Box mt={2} mb={2}>
       <CommentItem text={question} username={username} />
@@ -18,6 +21,9 @@ const Comment = ({ question, answer, username, isAdOwner }) => {
         {!answer && isAdOwner && (
           <CommentForm
             placeholder={`answer ${username}'s question`}
+            onSubmit={(text) => {
+              dispatch(answerQuestion(id, text));
+            }}
           ></CommentForm>
         )}
       </Box>
