@@ -3,11 +3,12 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
 import { getAd } from '../../../actions/ad.action';
-import useEnhancedDispatch from '../../../utils/useEnhancedDispatch';
+import useEnhancedDispatch from '../../../hooks/useEnhancedDispatch';
 import AdControls from './AdControls';
 import AdInfo from './AdInfo';
 import CommentList from '../comments/CommentList';
 import { getComments } from '../../../actions/comment.action';
+import useTitle from '../../../hooks/useTitle';
 
 const Ad = () => {
   const match = useRouteMatch();
@@ -22,6 +23,8 @@ const Ad = () => {
     dispatch(getComments(adId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [adId]);
+
+  useTitle(ad.title);
 
   if (!ad || !ad.user) {
     return null;

@@ -1,15 +1,17 @@
 import { Paper, Typography, Button, Box } from '@material-ui/core';
 import React from 'react';
-import useEnhancedDispatch from '../../../utils/useEnhancedDispatch';
+import useEnhancedDispatch from '../../../hooks/useEnhancedDispatch';
 import { getAd, removeAd } from '../../../actions/ad.action';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import Link from '../../common/Link';
 import withAdProtected from '../../../hoc/withAdProtected';
+import useTitle from '../../../hooks/useTitle';
 
 const DeleteAd = ({ ad }) => {
   const match = useRouteMatch();
   const history = useHistory();
   const dispatch = useEnhancedDispatch();
+  useTitle('Delete ad');
 
   const adId = +match.params.id;
 

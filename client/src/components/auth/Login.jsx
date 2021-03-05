@@ -5,6 +5,7 @@ import Link from '../common/Link';
 import { login, updateAuthStatus } from '../../actions/auth.actions';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import useTitle from '../../hooks/useTitle';
 
 const loginSchem = Yup.object().shape({
   username: Yup.string().min(3).max(25).required(),
@@ -17,6 +18,7 @@ const initialValues = {
 };
 
 const Login = () => {
+  useTitle('Login');
   const dispatch = useDispatch();
   const history = useHistory();
   const handleSubmit = async (values) => {

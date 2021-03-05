@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Grid } from '@material-ui/core';
 import { LiveHelp, QuestionAnswer } from '@material-ui/icons';
 import CommentForm from './CommentForm';
-import useEnhancedDispatch from '../../../utils/useEnhancedDispatch';
+import useEnhancedDispatch from '../../../hooks/useEnhancedDispatch';
 import { answerQuestion } from '../../../actions/comment.action';
 
 const Comment = ({ id, question, answer, username, isAdOwner }) => {

@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Box, ButtonGroup, Button } from '@material-ui/core';
 import { SkipNext, SkipPrevious } from '@material-ui/icons';
 import AdCard from './AdCard';
+import useTitle from '../../../hooks/useTitle';
 
 const ADS_PER_PAGE = 3;
 
@@ -11,6 +12,7 @@ const AdList = ({ ads }) => {
     pageNum * ADS_PER_PAGE,
     pageNum * ADS_PER_PAGE + ADS_PER_PAGE
   );
+  useTitle('Home');
   return (
     <>
       <Grid container justify="center">

@@ -4,7 +4,7 @@ import { Card, Typography } from '@material-ui/core';
 import CommentForm from './CommentForm';
 import { useSelector } from 'react-redux';
 import { askQuestion } from '../../../actions/comment.action';
-import useEnhancedDispatch from '../../../utils/useEnhancedDispatch';
+import useEnhancedDispatch from '../../../hooks/useEnhancedDispatch';
 
 const CommentList = ({ adId, isAdOwner }) => {
   const comments = useSelector((state) => state.comments.list);

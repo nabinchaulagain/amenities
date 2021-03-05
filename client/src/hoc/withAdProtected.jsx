@@ -1,5 +1,5 @@
 import React from 'react';
-import useEnhancedDispatch from '../utils/useEnhancedDispatch';
+import useEnhancedDispatch from '../hooks/useEnhancedDispatch';
 import { useSelector } from 'react-redux';
 import { useRouteMatch, Redirect } from 'react-router-dom';
 import { getAd } from '../actions/ad.action';

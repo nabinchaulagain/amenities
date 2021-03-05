@@ -5,6 +5,7 @@ import Link from '../common/Link';
 import { signup } from '../../actions/auth.actions';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import useTitle from '../../hooks/useTitle';
 
 const signupSchema = Yup.object().shape({
   username: Yup.string().min(3).max(25).required(),
@@ -22,6 +23,7 @@ const initialValues = {
 const Signup = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  useTitle('Signup');
 
   const validate = (values) => {
     if (values.password !== values.rePassword) {
