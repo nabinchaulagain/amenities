@@ -11,7 +11,7 @@ const commentReducer = (state = INITIAL_STATE, action) => {
     case GET_COMMENTS:
       return { ...state, list: action.payload };
     case ASK_QUESTION:
-      return { ...state, list: [...state.list, action.payload] };
+      return { ...state, list: [action.payload, ...state.list] };
     case ANSWER_QUESTION:
       const newList = state.list.map((item) => {
         if (item.id === action.payload.questionId) {

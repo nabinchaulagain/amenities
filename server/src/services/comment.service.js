@@ -38,7 +38,8 @@ const getComments = (adId) => {
     .leftJoin('answers', 'questions.id', 'answers.question_id')
     .innerJoin('users', 'questions.user_id', 'users.id')
     .select('questions.id AS id', 'question', 'answer', 'username')
-    .where({ 'questions.ad_id': adId });
+    .where({ 'questions.ad_id': adId })
+    .orderBy('id', 'desc');
 };
 
 module.exports = {
