@@ -71,3 +71,18 @@ body {
 .ad-info-list li {
   font-size: 18px;
 }
+
+.comment-list-container {
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.comment-list-container .icon svg {
+  width: 20px;
+  height: 20px;
+  margin-right: 4px;
+}
+
+.comment-user-displayer {
+  font-size: 12px;
+}

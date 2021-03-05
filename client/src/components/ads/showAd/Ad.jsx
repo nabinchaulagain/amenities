@@ -6,6 +6,7 @@ import { getAd } from '../../../actions/ad.action';
 import useEnhancedDispatch from '../../../utils/useEnhancedDispatch';
 import AdControls from './AdControls';
 import AdInfo from './AdInfo';
+import CommentList from '../comments/CommentList';
 
 const Ad = () => {
   const match = useRouteMatch();
@@ -48,6 +49,7 @@ const Ad = () => {
         </Container>
       </Grid>
       {ad.user.userId === userId && <AdControls id={ad.id} />}
+      <CommentList isAdOwner={ad.user.userId === userId}></CommentList>
     </Container>
   );
 };
