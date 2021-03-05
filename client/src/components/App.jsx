@@ -12,6 +12,7 @@ import EditAd from './ads/editAd/EditAd';
 import DeleteAd from './ads/deleteAd/DeleteAd';
 import Ad from './ads/showAd/Ad';
 import PrivateRoute from './common/PrivateRoute';
+import PageNotFound from './PageNotFound';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -43,6 +44,9 @@ const App = () => {
         <PrivateRoute path="/ads/:id(\d+)/delete" exact>
           <DeleteAd />
         </PrivateRoute>
+        <Route>
+          <PageNotFound />
+        </Route>
       </Switch>
     </BrowserRouter>
   );
